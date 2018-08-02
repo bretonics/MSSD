@@ -1,0 +1,3 @@
+[submodule "puppypicker"]
+	path = puppypicker
+	url = git@github.com:DucktimusPrime9/puppypicker.git
