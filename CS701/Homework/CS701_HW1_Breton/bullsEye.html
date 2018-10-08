@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Bulls Eye</title>
+        <script src="bullsEye.js"></script>
+    </head>
+    <body>
+        <canvas id="bullsEye" width="400" height="400"></canvas>
+        <br/>
+
+        <label for="bandWidth">Band Width:</label>
+        <input type="range" id="bandWidth" value="25" min="5" max="50" step="5"
+        oninput="sliderModule.drawPattern()"></input>
+        <br/> <br/>
+
+        <output id="currentWidth"></output>
+    </body>
+</html>

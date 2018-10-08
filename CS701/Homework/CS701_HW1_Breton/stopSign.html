@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Stop Signs</title>
+    </head>
+    <body>
+        <svg width="500" height="300">
+            <defs>
+                <g id="sign">
+                    <polygon points="50,5
+                                     120,5
+                                     155,40
+                                     155,110
+                                     120,145
+                                     50,145
+                                     15,110
+                                     15,40
+                                     "
+                    fill="red" stroke="lightgrey" stroke-width="4" >
+                    </polygon>
+                    <text x=24 y=88 font-size="50px" fill="white">STOP</text>
+                </g>
+            </defs>
+
+            <use xlink:href="#sign" transform="translate(0,0)"></use>
+            <use xlink:href="#sign" transform="translate(165,-10) rotate(90,75,75)"> </use>
+            <use xlink:href="#sign" transform="translate(330,0) rotate(180,75,75)"> </use>
+            <use xlink:href="#sign" x=155 y=150>
+                <animateTransform
+                    attributeName="transform"
+                    begin="0s" dur="0.75s"
+                    type="rotate"
+                    from="0 240 225"
+                    to="360 240 225"
+                    <!-- additive="sum" -->
+                    repeatCount="indefinite">
+                </animateTransform>
+            </use>
+        </svg>
+    </body>
+</html>
