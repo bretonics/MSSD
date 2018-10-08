@@ -9,7 +9,7 @@ Courses:
 - [x]  [Python](https://github.com/bretonics/MSSD/tree/master/CS521/Homework)
 - [x] [Agile Development](https://ducktimusprime9.github.io/puppypicker/)
 - [x] Information Systems Analysis and Design
-- [ ] Software Design and Patterns
+- [ ] [Software Design and Patterns](https://github.com/bretonics/MSSD/tree/master/CS701/Homework)
 - [ ] Rich Internet Application Development
 - [ ] Server-side Web Development
 - [ ] Advanced Java
