@@ -1,0 +1,64 @@
+<!--- Author: Guadalupe Delgado
+      Date: 6/26/18 --->
+
+<!doctype html>
+<html>
+    <head>
+        <title>Home</title>
+        <link href="css/style.css"rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+        <header>
+            <div class="header">
+                <a href="index.html"><img style="float:left" src="images/paw_print.png" alt="Logo" width="40" height="40"><h4 class="logo">PUPPYPICKER</h4></img></a>
+                <nav>
+                    <ul>
+                        <li><a href="dogbreeds.html">DOG BREEDS</a></li>
+                        <li><a href="quiz.html">QUIZ</a></li>
+                        <li> <a href="about.html">ABOUT US</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Hero Section -->
+            <div style="text-align:center">
+                <h2>Welcome to PuppyPicker!</h2>
+                <div style="font-weight: bold">
+                    <p>Take your quiz to find out what breed of puppy you should adopt, based on certain lifestyle factors.<br>Our breed descriptions come from the AKC, "American Kennel Club".
+                    </p>
+                </div>
+            </div>
+
+            <div class="puppySlides!" style="max-width:750px; margin:0 auto;">
+                <img class="puppySlideShow" src="images/slide1.jpg" style="width:100%">
+                <img class="puppySlideShow" src="images/slide2.jpg" style="width:100%">
+                <img class="puppySlideShow" src="images/slide3.jpg" style="width:100%">
+                <div style="text-align: center;">
+                    <p><a href="quiz.html" class="button" style="background-color:#007777">TAKE THE QUIZ</a>
+                    </p>
+                </div>
+            </div>
+            <!-- Main Container Ends -->
+        </div>
+
+        <script>
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("puppySlideShow");
+            for (i = 0; i < x.length; i++) {
+               x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) {myIndex = 1}
+            x[myIndex-1].style.display = "block";
+            setTimeout(carousel, 6000); // Change image every 6 seconds
+        }
+        </script>
+    </body>
+</html>
