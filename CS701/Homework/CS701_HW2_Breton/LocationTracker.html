@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Location Tracker</title>
+        <script src="LocationTracker.js"></script>
+        <link rel="stylesheet" href="html5.css">
+    </head>
+    <body>
+        <header>
+            <h2>Bird Location Tracker</h2>
+        </header>
+        <main>
+            <section>
+                <article>
+                    <button id="startButton">Start</button>
+                </article>
+                <article id="status">
+                    <p id="counter">Update #:</p>
+                    <p id="startLatitude">Start Latitude:</p>
+                    <p id="startLongitude">Start Longitude:</p>
+                    <p id="currentLatitude">Current Latitude:</p>
+                    <p id="currentLongitude">Current Longitude:</p>
+                </article>
+                <div id="map"></div>
+            </section>
+        </main>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT2_sA3Z-aoztwo3AhNk8shuwWu7l80GA" async defer></script>
+    </body>
+</html>
