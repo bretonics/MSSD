@@ -10,4 +10,4 @@ Projects
 - [7](https://github.com/bretonics/MSSD/tree/master/CS526/Homework/7)
 - [8](https://github.com/bretonics/MSSD/tree/master/CS526/Homework/8)
 - [9](https://github.com/bretonics/MSSD/tree/master/CS526/Homework/9)
-- [Project](https://github.com/bretonics/MSSD/tree/master/CS526/Homework/tests)
+- [Project](https://github.com/bretonics/MSSD/tree/master/CS526/Project)

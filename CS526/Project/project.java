@@ -16,7 +16,6 @@
 
 import java.io.*;
 import java.util.*;
-import java.util.Scanner;
 
 
 public class project {
@@ -34,11 +33,12 @@ public class project {
     // Input files
     Scanner graphFile = new Scanner(new File("graph_input.txt")); // graph file object
     Scanner distanceFile = new Scanner(new File("direct_distance.txt")); // distance file object
+    // Scanner graphFile = new Scanner(new File("original.txt")); // graph file object
+    // Scanner distanceFile = new Scanner(new File("original_dd.txt")); // distance file object
 
     // Data structures for adjacency graph and direct distance information
     String[][] graph = parseGraph(graphFile); // Parse graph file
     Map<String, Integer> distances = parseDistance(distanceFile); // Parse direct distance file
-
     ArrayList<String> vertexNames = getVertices(graph); // get vertex names
     String startNode = promptUser(vertexNames); // prompt user for start node
 
@@ -53,20 +53,26 @@ public class project {
     * @return String[][] adjacency matrix of graph in string format.
     */
     public static String[][] parseGraph(Scanner file) {
-        String[][] matrix = new String[26][26];
+        String[][] matrix = new String[27][26];
+        // String[][] returnMatrix = matrix;
         int i = 0; // start of edges in each row
 
         // Process graph file
         while (file.hasNext()) { // loop every line
             String line = file.nextLine(); // Get line as string
-            String[] values = line.split("\\s+"); // Split line by space(s)
-            int nNodes = values.length;
-            // Get each vertex's edge weight -
-            // Skip first column (j = 1), vertex names, which have already
-            // been captured in 1st row
-            for (int j = 1; j < nNodes; j++) {
-                String edge = values[j];
-                matrix[i][j-1] = edge; // need -1 because we want to store starting at index = 0
+            ArrayList<String> values = new ArrayList<String>();
+            String[] elements = line.split("\\s+"); // Split line by space(s)
+            // Get elements from line and store in ArrayList
+            for (int k = 0; k < elements.length; k++) {
+                values.add(elements[k]);
+            }
+            values.remove(0); //remove first element (spaces or node in row)
+            int nValues = values.size();
+            // .removeAll(Collections.singleton(null));
+            // Get each vertex's edge weight
+            for (int j = 0; j < nValues; j++) {
+                String edge = values.get(j);
+                matrix[i][j] = edge;
             }
             i++;
         }
@@ -131,7 +137,7 @@ public class project {
                     // Value == edge distance int
                     for (int e = 0; e < numVertices; e++) {
                         String vertex = vertexNames.get(e); // current vertex name
-                        int edge = Integer.parseInt(graph[n+1][e]); // n + 1 required since index start at 0 column == vertex names
+                        int edge = Integer.parseInt(graph[n+1][e]); // get edge value
                         // Store only connecting edges
                         if (edge != 0) {
                             // Make sure node to add is not one previously stored as being a "dead end"
@@ -155,10 +161,29 @@ public class project {
                             nextNode = previousNode; // reset node back to previous node (backtrack)
                             deadEnd = currentNode; // set node that was "dead end"
                     } else {
-                        // DETERMINE NEXT NODE IN PATH -- Algorithm dependent
-                        previousNode = path.get(path.size()-1); // store previous node's vertex name
                         nextNode = smallest(adjacentNodes, distances, algorithm); // get next node of shortest path
+                        // Check if next node to traverse already in path, keep getting new until unique
+                        while (path.contains(nextNode)) {
+                            // Skip first node entered
+                            if (adjacentNodes.size() == 1) {
+                                break;
+                            }
+                            adjacentNodes.remove(nextNode); // remove nextNode from testing traversal
+                            // shortestPath.remove(nextNode); // remove nextNode from testing traversal
+                            // DETERMINE NEXT NODE IN PATH -- Algorithm dependent
+                            nextNode = smallest(adjacentNodes, distances, algorithm); // get next node of shortest path
+                            System.out.println("\t Next node chosen ---> " + nextNode);
+                        }
+                        System.out.println("Adding next node '" + nextNode + "' to paths");
+                        if (path.size() > 1) {
+                            previousNode = path.get(path.size()-2); // store previous node's vertex name
+                        } else {
+                            previousNode = path.get(path.size()-1); // store previous node's vertex name
+                        }
+                        System.out.println("Previous node " + previousNode);
+
                         shortestPath.put(nextNode, adjacentNodes.get(nextNode)); // add selected node to shortest path
+                        previousNode = path.get(path.size()-1); // store previous node's vertex name
                         path.add(nextNode); // add selected node to overall path
                     }
                     if (nextNode.equals("Z")) { break; } // exit once at node Z

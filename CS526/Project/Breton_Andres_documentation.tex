@@ -1,0 +1,497 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for
+% including it in another document. To do this, you have two options:
+%
+% 1) Copy/paste everything between \begin{document} and \end{document}
+% starting at \begin{titlepage} and paste this into another LaTeX file where you
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and
+% move this file to the same directory as the LaTeX file you wish to add it to.
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{Title page with logo}
+%----------------------------------------------------------------------------------------
+%    PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[14pt]{extarticle}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper, margin=1in}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{nameref}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.95}
+
+\lstset{
+  % frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  backgroundcolor=\color{backcolour},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+%----------------------------------------------------------------------------------------
+%    HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Boston University}\\[1.5cm] % Name of your university/college
+\textsc{\Large Data Structures and Algorithms}\\[0.5cm] % Major heading such as course name
+\textsc{\large CS526}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%    TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Project}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+%----------------------------------------------------------------------------------------
+%    AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+\Large Andrés \textsc{Bretón}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%    DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%    LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\includegraphics{boston_univ.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%   INTRODUCTION SECTION
+%----------------------------------------------------------------------------------------
+\section*{Introduction}
+This project implements two heuristic algorithms to find the shortest path in a graph from a user input \emph{node} to destination node \textit{Z} given two files: an \textbf{adjacency matrix} and a \textbf{direct distance} file. The program reads these two files and stores them in the two data structures; a \hyperlink{array}{two-dimensional \texttt{String[][]} array} and a \hyperlink{hashmap}{\texttt{Map<String, Integer>} HashMap} to store the adjacency matrix and the direct distances respectively.
+
+The program \textbf{project.java} is executed with \texttt{java project.java}. It starts by asking the user to enter a starting node, and then checks that the provided node is valid (that the vertex name is in the graph), continuing to ask until a valid node is entered (case sensitivity handled). Once a valid \emph{node} is entered it interactively determines which node to choose as the next node for the shortest path using to different heurist algorithms (\hyperref[algo1]{Algorithm 1} and \hyperref[algo2]{Algorithm 2}) described below.
+
+The main method calls \texttt{shortestPath(graph, distances, algorithm, startNode)} method twice to find the shortest paths using each algorithm (\texttt{algorithm} parameter in \texttt{shortestPath} is an integer of 1 or 2 representing the heuristic algorithm to implement in the call).
+
+\pagebreak
+
+\section*{Usage Examples}
+\begin{lstlisting}[language=Bash]
+Enter a start node: j
+
+Algorithm 1:
+
+    Sequence of all nodes: J -> K -> Z
+    Shortest path: J -> K -> Z
+    Shortest path length: 310
+
+Algorithm 2:
+
+    Sequence of all nodes: J -> I -> L -> Z
+    Shortest path: J -> I -> L -> Z
+    Shortest path length: 278
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=Bash]
+    Enter a start node: G
+
+    Algorithm 1:
+
+        Sequence of all nodes: G -> H -> T -> H -> L -> Z
+        Shortest path: G -> H -> L -> Z
+        Shortest path length: 359
+
+    Algorithm 2:
+
+        Sequence of all nodes: G -> H -> T -> H -> L -> Z
+        Shortest path: G -> H -> L -> Z
+        Shortest path length: 359
+\end{lstlisting}
+
+\begin{lstlisting}[language=Bash]
+Enter a start node: B
+
+Algorithm 1:
+
+	Sequence of all nodes: B -> C -> J -> K -> Z
+	Shortest path: B -> C -> J -> K -> Z
+	Shortest path length: 525
+
+Algorithm 2:
+
+	Sequence of all nodes: B -> C -> J -> I -> L -> Z
+	Shortest path: B -> C -> J -> I -> L -> Z
+	Shortest path length: 493
+\end{lstlisting}
+
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%   DATA STRUCTURES SECTION
+%----------------------------------------------------------------------------------------
+\section*{Data Structures}
+
+\hypertarget{array}{\subsection*{Adjacency Matrix Two-dimensional Array}}
+Each node has number representations associated with an edge, called the weight of the edge, which represents the distance between the two vertices (nodes) connected by the edge. This means a value of 0 represents vertices that \textbf{do not} connect. The graph file is parsed by the \texttt{parseGraph} method, which returns the two-dimensional string array \texttt{String[][]} data structure used to store the graph information.
+
+Since all \emph{n} (\emph{n} equalling the number of nodes) nodes have an entry representing the weight of the edge between all other \emph{n} nodes, a two-dimensional \texttt{String[][]} array (matrix) stores this relational data well. The graph file is parsed and stored in the following manner: the first row of this two-dimensional array stores the vertex names found in the first row of the graph file in \texttt{String} type. Each row thereafter in this two-dimensional array contains the edge weights to all nodes (vertices), in \texttt{String} type (later converted to as \texttt{Integer} type), for each node in the order referenced by the first row of the adjacency graph, i.e. the vertex names.
+
+Additionally, to easily access vertex names, method \texttt{getVertices(String[][] graph)} was implemented to return an \texttt{ArrayList<String>} containing vertex names extracted from the \texttt{String[][]} array's first row. The indices 0 to \emph{n}-1 (i.e. the length of this \texttt{ArrayList<String>}) represent the indices of the vertices. That is, vertexNames[0] == "A", vertexNames[0] == "B", ... vertexNames[n-1] == "NODE".
+
+\vspace*{\baselineskip}
+\textbf{Example:} After parsing the graph file, if the \emph{first row} (\texttt{graph[0]}) of this data structure contains the following nodes:
+\begin{lstlisting}[language=Bash]
+A   B   C   D   E   F   G   H   I   J   K   L   M   N   O   P   Q   R   S   T   Z
+\end{lstlisting}
+the \emph{second row} (\texttt{graph[1]}) contains the edge weights of \textbf{A} (\texttt{graph[0][0]}, or vertexNames[0]) to all other nodes:
+\begin{lstlisting}[language=Bash]
+0  71   0   0   0   0   0   0   0 151   0   0   0   0   0   0   0   0   0   0   0
+\end{lstlisting}
+Thus, the weight of node \emph{A} to \emph{B} is \textbf{71} (\texttt{graph[1][1]}), \emph{A} to \textbf{J} is \textbf{151} (\texttt{graph[1][9]}), and \emph{0} to all others.
+
+
+\subsection*{Maps}
+
+\hypertarget{hashmap}{\subsubsection*{Direct Distance HashMap}}
+The direct distance file contains key/value (node/distance) pairs for each node's direct distance to node \emph{Z}. This is a perfect representation of a hash with key/value pairs, so a HashMap was used to store each node's direct distance value to \emph{Z}.
+
+Method \texttt{parseDistance} parses the direct distance file and returns a \texttt{Map<String, Integer>} HashMap which stores as its \textbf{key} the \textbf{vertex name} as a \texttt{String}, and the \textbf{direct distance} \texttt{Integer} as the key's \textbf{value}. This makes accessing the direct distance of any \emph{n} node to \emph{Z} incredibly trivial.
+
+\vspace*{\baselineskip}
+\textbf{Example:} Using \emph{distances} HashMap, \texttt{distances.get(key)} returns the \emph{key}'s direct distance, i.e. \texttt{distances.get("A")} returns 380.
+
+
+\subsubsection*{LinkedHashMaps}
+Two other \texttt{Map<String, Integer>} LinkedHashMaps were implemented to temporarily hold the adjacent nodes of the current node (to help determine which node to traverse next in the path), and to store the nodes determined to be the shortest path.
+
+The \emph{adjacent nodes} LinkedHashMap stored the nodes in order (\underline{essential} to keep order so that if current \underline{node leads to a "dead end", it can backtrack} to the previous node and prevent it from going back to this "dead end" node by removing the last entry, i.e. the "dead end" node) with the \textbf{key} being a \texttt{String} \textbf{vertex name} and its \textbf{value} an \texttt{Integer} edge weight.
+
+Once all adjacent nodes of node \emph{n} were stored in this \texttt{adjacentNodes Map<String, Integer>} data structure, method \texttt{smallest} was called to determine the appropriate node to traverse next, i.e. the next node in the path, according to the algorithm being implement (\hyperref[algo1]{Algorithm 1} or \hyperref[algo2]{Algorithm 2}).
+
+The \emph{shortest path} LinkedHashMap stores the nodes in order (\underline{essential} to keep the order of when each node was added into the path so the program knows the \underline{correct order of the nodes traversed}) determined to be the shortest path taken from input \emph{node} to node \emph{Z}. It stores the \textbf{key} as a \texttt{String} representing the \textbf{vertex name} and its \textbf{value} as an \texttt{Integer} of the edge weight.
+
+\newpage
+
+
+%----------------------------------------------------------------------------------------
+%   PSEUDOCODE SECTION
+%----------------------------------------------------------------------------------------
+\section*{Pseudocode}
+\label{pseudocode}
+The pseudocode for the main logic for both algorithms is outlined below, with specific pseudocode for each algorithm's heuristic calculations detailed in \hyperref[algo1]{Algorithm 1} and \hyperref[algo2]{Algorithm 2} sections:
+\begin{lstlisting}[language=Java]
+/* Data structures for adjacency graph and direct distance information */
+// Parse graph file into multi-dimensional array
+String[][] graph = parseGraph(graphFile);
+// Parse direct distance file to Map
+Map<String, Integer> distances = parseDistance(distanceFile);
+
+/* Prompt user for a start node */
+String startNode = ""; // variable for user node
+while (startNode not in graph) { // keep asking until valid node
+    startNode = input // get node input from user and set as start node
+    startNode.toUpperCase() // set string to all upper case for comparison consistency
+}
+
+// Find shortest paths with algorithm 1 and print results
+shortestPath(graph, distances, 1, startNode);
+
+// Find shortest paths with algorithm 2 and print results
+shortestPath(graph, distances, 2, startNode);
+
+/* In shortestPath() method */
+// Create data structures to hold information
+// Get vertex names
+ArrayList<String> vertexNames = getVertices(graph);
+// To store adjacent nodes of current node
+Map<String, Integer> adjacentNodes = new LinkedHashMap<String, Integer>();
+// To store nodes of shortes path
+Map<String, Integer> shortestPath = new LinkedHashMap<String, Integer>();
+ArrayList<String> path = new ArrayList<String>(); // store nodes of overall path taken
+
+// Initially set to user starting node,
+// updates after each node taken in path to distination node "Z"
+nextNode = startNode;
+
+// Initialize values for testing on each current node's next node iteration
+String previousNode = ""; // previous node in path
+String deadEnd = ""; // deadEnd node in path
+
+// Loop all nodes (rows in graph), find next node in question
+while (nextNode != "Z") { // Don't stop until last node is "Z"
+
+    // Loop through adjacency matrix n times, i.e. through every node
+    // n is row index of currenNode in multi-dimensional array
+    for (int n = 0; n < numVertices; n++) {
+        currentNode = vertexNames.get(n); // current node name in loop
+
+        // Look for nextNode's row containing information of its edge weights to all other nodes
+        if (currentNode == nextNode) {
+            // Clear Map to hold adjacent nodes as now at new currentNode
+            adjacentNodes.clear();
+
+            // Loop through n times, i.e. every edge of the currentNode to store as an adjacent node
+            for (int e = 0; e < numVertices; e++) {
+                // Get current vertex name to test and turn edge value to Integer from String
+                vertex = vertexNames.get(e);
+                int edge = Integer.parseInt(vertex edge weight);
+
+                // Store only connecting edges - nodes do not connect if edge == 0
+                if (edge != 0) {
+                    // Do not store node as an adjacent node when set as a "dead end" node
+                    // Only store in Map if current adjacent vertex not a "dead end"
+                    if (vertex != deadEnd) {
+                        adjacentNodes.put(vertex);
+                    }
+                }
+            }
+            // Check if previous node is a "dead end" node:
+            // Dead end would only have 1 adjacent node, and this single node is the previous node in path
+            if (previousNode == vertex && numAdjacent == 1) {
+                path.add(vertex); // add node to overall path
+                // Remove this previously added node from shortest path (no longer valid)
+                shortestPath.remove(currentNode);
+                // Reset next node to check back to previous node (backtrack)
+                nextNode = previousNode;
+                // Set this current node as a "dead end" to skip in check of nextNode's adjacent nodes
+                deadEnd = currentNode;
+
+              // We now have all the proper adjacent nodes added to adjacentNodes Map for the current node. Test all adjacent nodes and get the next node to traverse for the shortest path according to heurist algorithm
+            } else {
+                previousNode = path.get(path.size()-1); // store previous node's vertex name
+                // DETERMINE NEXT NODE IN PATH -- Algorithm dependent
+                // Get next node for shortest path according to heurist algorithm called
+                nextNode = smallest(adjacentNodes, distances, algorithm);
+                // Add next node selected to shortest path and overall path
+                shortestPath.put(nextNode);
+                path.add(nextNode);
+            }
+            // Exit "if" statement looping through rows containing edge weights of current node once at node "Z"
+            if (nextNode == "Z") { break; }
+        }
+    }
+}
+
+/* Done generating shortest and overall paths taken from input node to destination Z */
+// Print results for Algorithm 1 stored in ArrayList<String>
+for (int j = 0; j < path.size(); j++) {
+    print path.get(j); // print next node entry in overall path Map
+}
+
+// Print results for Algorithm 2 stored in Map<String, Integer>
+paths = shortestPath.entrySet().iterator(); // create iterator
+while (paths.hasNext()) { // loop through Map entries
+    currentNode = paths.next(); // get next node entry in Map
+    print currentNode.getKey(); // print next node name
+    total += currentNode.getValue(); // add edge weight to total sum
+}
+print total // total sum of all edge weights in shortest path
+\end{lstlisting}
+
+\hyperref[algo1]{Algorithm 1} and \hyperref[algo2]{Algorithm 2} share a lot of the same implementations, since the only difference is that \hyperref[algo2]{Algorithm 2} determines the next node by \emph{direct distance} (calculated by \hyperref[algo1]{Algorithm 1}) \textbf{+} \emph{edge weight}, the only requirement to implement \hyperref[algo2]{Algorithm 2} is to additionally obtain the node's \textbf{edge weight}. The following (source code \texttt{line 160}) determines the \textbf{next node} to traverse and is \underline{algorithm dependent}, i.e. heurist algorithm called to find the shortest path:
+
+\begin{lstlisting}[language=Java]
+// DETERMINE NEXT NODE IN PATH -- Algorithm dependent
+// Get next node for shortest path according to heurist algorithm called (algorithm == 1 or 2)
+nextNode = smallest(adjacentNodes, distances, algorithm);
+// Add next node selected to shortest path and overall path
+shortestPath.put(nextNode, adjacentNodes.get(nextNode));
+path.add(nextNode); // add selected node to overall path
+\end{lstlisting}
+
+The different implementations when calling the \texttt{smaller} method to obtain the next node to traverse for each algorithm is further explained under \hyperref[algo1]{Algorithm 1} and \hyperref[algo2]{Algorithm 2}.
+
+\newpage
+
+\subsection*{Algorithm 1}
+\label{algo1}
+This heurist method chooses the next node as the one with smallest \textbf{direct distance (dd)} between all adjacent nodes of the current node.
+
+When the program gets to \texttt{line 160}, it calls method \texttt{smallest}:
+\begin{lstlisting}[language=Java]
+// Gets the next node for shortest path according to heurist algorithm == 1
+nextNode = smallest(adjacentNodes, distances, algorithm == 1);
+\end{lstlisting}
+
+This method, outlined below, loops through every adjacent node of the current node to find and return, to \texttt{line 160}, the node from all the adjacent nodes with the smallest \textbf{dd} value:
+\begin{lstlisting}[language=Java]
+// Create iterator for all adjacent nodes
+Iterator<Map.Entry<String, Integer>> adjacent = adjacentNodes.entrySet().iterator();
+
+// Loop through every adjacent node and get its direct distance and edge value
+while (adjacent.hasNext()) {
+    entry = adjacent.next(); // get next entry in Map
+    // Initiliaze first weight of current adjacent node for comparison
+    Integer w = entry.getValue();
+    // Initiliaze first dd value of current adjacent node for comparison
+    Integer dd = distances.get(entry.getKey());
+
+    // Determine next node depending on which heuristic algorithm being used
+    if (algorithm == 1) {
+        // Compare direct distance of all adjacent nodes of currentNode, set smallest direct distance node
+        if (dd < smallestDD) {
+            node = entry.getKey();
+            smallestDD = dd; // set smallest to new edge value
+        }
+    } else { // algorithm == 2
+        if (w + dd < smallest) {
+            node = entry.getKey();
+            smallest = w + dd; // set smallest (edge weight + direct distance)
+        }
+    }
+}
+return node;
+\end{lstlisting}
+
+From the \texttt{smallest} method above, when \hyperref[algo1]{Algorithm 1} is referenced, the following section is executed to find the smallest \textbf{direct distance} value between all the adjacent nodes, ultimately returning this node to the caller to \texttt{line 160}:
+\begin{lstlisting}[language=Java]
+// Determine next node based on heuristic algorithm 1
+if (algorithm == 1) {
+    // Compare direct distance of all adjacent nodes of currentNode, set smallest direct distance node
+    if (dd < smallestDD) { // test if current direct distance (dd) is smaller than previous
+        node = entry.getKey();
+        smallestDD = dd; // set smallest to new edge value
+    }
+}
+return node;
+\end{lstlisting}
+
+When the next node is returned to \texttt{line 160}, it then adds this selected node (the next node determined by \hyperref[algo1]{Algorithm 1} from the \texttt{smallest} method call) to the shortest and overall paths at lines \texttt{line 161} and \texttt{line 162}.
+\begin{lstlisting}[language=Java]
+shortestPath.put(nextNode); // add selected node to shortest path
+path.add(nextNode); // add selected node to overall path
+\end{lstlisting}
+
+\newpage
+
+\subsection*{Algorithm 2}
+\label{algo2}
+This heurist method chooses the next node as the one with smallest summation of \textbf{direct distance + edge weight} between all adjacent nodes of the current node.
+
+When the program gets to \texttt{line 160}, it calls method \texttt{smallest}:
+\begin{lstlisting}[language=Java]
+// Gets the next node for shortest path according to heurist algorithm == 2
+nextNode = smallest(adjacentNodes, distances, algorithm == 2);
+\end{lstlisting}
+
+This method, again outlined below, loops through every adjacent node of the current node to find and return, to \texttt{line 160}, the node from all the adjacent nodes  with the smallest \textbf{direct distance + edge weight} value:
+\begin{lstlisting}[language=Java]
+// Create iterator for all adjacent nodes
+Iterator<Map.Entry<String, Integer>> adjacent = adjacentNodes.entrySet().iterator();
+
+// Loop through every adjacent node and check its direct distance and edge value
+while (adjacent.hasNext()) {
+    entry = adjacent.next(); // get next entry in Map
+    Integer w = entry.getValue(); // get weight of current adjacent node
+    Integer dd = distances.get(entry.getKey()); // get dd value of current adjacent node
+
+    // Determine next node depending on which heuristic algorithm being used
+    if (algorithm == 1) {
+        // Compare direct distance of all adjacent nodes of currentNode, set smallest direct distance node
+        if (dd < smallestDD) {
+            node = entry.getKey();
+            smallestDD = dd; // set smallest to new edge value
+        }
+    } else { // algorithm == 2
+        if (w + dd < smallest) {
+            node = entry.getKey();
+            smallest = w + dd; // set smallest (edge weight + direct distance)
+        }
+    }
+}
+return node;
+\end{lstlisting}
+
+From the \texttt{smallest} method above, when \hyperref[algo2]{Algorithm 2} is referenced, the following section is executed to find the smallest value for the summation of the current adjacent node's \textbf{direct distance + its edge weight}, ultimately returning this node to the caller to \texttt{line 160}:
+\begin{lstlisting}[language=Java]
+// Determine next node based on heuristic algorithm 2
+else {
+    if (w + dd < smallest) { // test if edge weight (w) + direct distance (dd) is smaller than previous
+        node = entry.getKey();
+        smallest = w + dd; // set smallest (edge weight + direct distance)
+    }
+}
+return node;
+\end{lstlisting}
+
+When the next node is returned to \texttt{line 160}, it then adds this select node (the next node determined by \hyperref[algo2]{Algorithm 2} from the \texttt{smallest} method call) to the shortest and overall paths at lines \texttt{line 161} and \texttt{line 162}.
+\begin{lstlisting}[language=Java]
+shortestPath.put(nextNode); // add selected node to shortest path
+path.add(nextNode); // add selected node to overall path
+\end{lstlisting}
+
+The program will continue until reaching destination node \emph{Z}. You can refer the \hyperref[pseudocode]{pseudocode} section for the executions when reaching node \emph{Z}; printing out results.
+
+\newpage
+
+%----------------------------------------------------------------------------------------
+%   SOURCE CODE SECTION
+%----------------------------------------------------------------------------------------
+\section*{Source Code}
+The source file is included along with this report as file \texttt{project.java} in the zip package. For reference, it contains the following source code:
+\lstinputlisting[language=Java, firstline=17]{project.java}
+
+
+\end{document}
