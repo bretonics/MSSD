@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="cart">
+    <head>
+        <title>Book Shopping Cart</title>
+        <script src="js/angular157.js"></script>
+        <script src="js/cart.js"></script>
+        <link rel="stylesheet" href="css/cart.css">
+    </head>
+
+<body ng-controller="CartControler">
+
+    <table>
+      <caption><b>My Books</b></caption>
+      <thead>
+        <tr>
+            <th>Title</th>
+            <th>Qty</th>
+            <th>UnitPrice</th>
+            <th>$UnitPrice</th>
+            <th>Line Total</th>
+            <th>Total {{total() | currency }} </th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr ng-repeat="book in books track by $index">
+            <td>
+                <input ng-model="book.title">
+            </td>
+            <td>
+                <input ng-model="book.qty" size="2">
+            </td>
+            <td>
+                <input ng-model="book.price">
+            </td>
+            <td>{{book.price | currency}}</td>
+            <td>{{book.price * book.qty | currency}}</td>
+            <td align="center">
+                <button ng-click="removeBook($index)">
+                    Remove
+                </button>
+            </td>
+        </tr>
+      </tbody>
+      <tfoot>
+          <tr>
+              <th></th>
+              <th>
+                  <button ng-click="newBook()">
+                      New
+                  </button>
+              </th>
+              <th></th>
+              <th></th>
+              <th>
+                  <button ng-click="save()">
+                      Save
+                  </button>
+              </th>
+              <th></th>
+          </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>
