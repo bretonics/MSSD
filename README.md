@@ -9,7 +9,7 @@ Courses:
 
 - [x] Algorithms and Data Structures in Java [(CS526)](https://bretonics.github.io/MSSD/CS526)
 - [x] Python [(CS521)](https://bretonics.github.io/MSSD/CS521)
-- [x] Agile Development [(CS634)]](https://bretonics.github.io/MSSD/puppypicker/)
+- [x] Agile Development [(CS634)](https://bretonics.github.io/MSSD/puppypicker/)
 - [x] Information Systems Analysis and Design (CS682)
 - [x] Software Design and Patterns [(CS665)](https://bretonics.github.io/MSSD/CS665)
 - [x] Rich Internet Application Development [(CS701)](https://bretonics.github.io/MSSD/CS701)
