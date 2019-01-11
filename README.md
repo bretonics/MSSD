@@ -1,7 +1,9 @@
 M.S. in Software Development
 ---
 
-Some course work highlighting what I have learned and used during my studies.
+Check out the [main projects page](https://bretonics.github.io/MSSD/).
+
+Course work highlighting what I have learned and used during my studies.
 
 Courses:
 
@@ -9,7 +11,9 @@ Courses:
 - [x] [Python](https://bretonics.github.io/MSSD/CS521)
 - [x] [Agile Development](https://bretonics.github.io/MSSD/puppypicker/)
 - [x] Information Systems Analysis and Design
-- [ ] Software Design and Patterns
-- [ ] [Rich Internet Application Development](https://bretonics.github.io/MSSD/CS701)
+- [x] [Software Design and Patterns](https://bretonics.github.io/MSSD/CS665)
+- [x] [Rich Internet Application Development](https://bretonics.github.io/MSSD/CS701)
 - [ ] Server-side Web Development
 - [ ] Advanced Java
+
+🎓 Graduation May 2019 🎓
