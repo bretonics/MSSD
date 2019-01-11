@@ -1,0 +1,32 @@
+<div class="col-md-4">
+ <table class="table table-striped">
+	<thead>
+		<nav>
+			 <a class="btn btn-warning" [routerLink]="['/edit',  friend.id ]"
+  		routerLinkActive="active">Edit</a>
+			 <a class="btn btn-danger" (click)="deleteContact(friend)">Delete</a>
+		</nav>
+	</thead>
+
+  <tbody>
+  	 <tr> <td>Id:</td> <td>{{friend.id}}</td> </tr>
+     <tr> <td>Name:</td> <td>{{friend.name}}</td> </tr>
+     <tr> <td>Address:</td> <td>{{friend.address}}</td> </tr>
+     <tr> <td>Phone:</td> <td>{{friend.phone}}</td> </tr>
+  </tbody>
+
+  <tfoot>
+  	<nav>
+			<a [routerLink]="['/details',  friend.id - 1 ]"
+							*ngIf="!(friend.id == 1)">
+				Prev
+			</a>
+			<a [routerLink]="['/details',  friend.id + 1 ]"
+						*ngIf="!(friend.id == totalContacts)">
+			 Next
+  		</a>
+		</nav>
+  </tfoot>
+
+ </table>
+</div>

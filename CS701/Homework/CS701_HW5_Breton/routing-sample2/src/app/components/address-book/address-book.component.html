@@ -1,0 +1,15 @@
+<h3>Current Contacts</h3>
+
+<ul>
+  <li *ngFor="let friend of friends">
+    <a [routerLink]="['/details',  friend.id ]" >
+    		{{friend.name}}
+    </a>
+  </li>
+</ul>
+
+<nav>
+	<a routerLink="/add">
+		<a class="btn btn-info">Add New Contact</a>
+	</a>
+</nav>
